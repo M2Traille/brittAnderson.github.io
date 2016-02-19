@@ -1,0 +1,20 @@
+#+OPTIONS: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline
+#+OPTIONS: author:t c:nil creator:nil d:(not "LOGBOOK") date:t e:t
+#+OPTIONS: email:nil f:t inline:t num:t p:nil pri:nil prop:nil stat:t
+#+OPTIONS: tags:t tasks:t tex:t timestamp:t title:t toc:t todo:t |:t
+#+DATE: <2016-02-12 Fri>
+#+AUTHOR:
+#+EMAIL: britt@brittoffice.uwaterloo.ca
+#+LANGUAGE: en
+#+SELECT_TAGS: export
+#+EXCLUDE_TAGS: noexport
+#+CREATOR: Emacs 24.5.1 (Org mode 8.3.3)
+#+TITLE: Britt Anderson
+   Currently, I live and work in Waterloo, Ontario Canada. While I very much enjoy Canada and its social values, one of the nicer things about Europe is that one can wear a beret, the world's most functional hat [fn:hat], without getting starred at.
+   
+   #+Caption: Britt Anderson, Zürich Switzerland, 2012
+   #+ATTR_HTML: :alt britt anderson image :title Wouldn't be so yellow except I didn't wash the print enough after fixation. :align center :width 400
+   [[file:./assets/brittBeret.png]]
+
+[fn:hat] It is the most functional because it will keep you warm and protected from the sun. You can crush it in your pocket and it looks no worse for wear, and it is impossible to put on backwards.
+
