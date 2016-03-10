@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2016-03-10 Thu 13:03 -->
+<!-- 2016-03-10 Thu 13:11 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>Britt Anderson</title>
@@ -160,6 +160,22 @@ This is what I look like in a beret.
 </p>
 <p><span class="figure-number">Figure 1:</span> Me in a beret</p>
 </div>
+</div>
+</div>
+<div id="outline-container-orgheadline2" class="outline-2">
+<h2 id="orgheadline2"><span class="section-number-2">2</span> Some things I have written</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Here is a link to an <a href="http://dx.doi.org/10.3389/fpsyg.2015.00321">article</a>.
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline3" class="outline-2">
+<h2 id="orgheadline3"><span class="section-number-2">3</span> And a file lower down.</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Here it <a href="second.html">is</a>.
+</p>
 </div>
 </div>
 </div>
