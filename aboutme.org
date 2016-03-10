@@ -1,0 +1,13 @@
+#+Title: Britt Anderson
+* An introductory test
+  My name is Britt Anderson
+
+  This is what I look like in a beret.
+
+  #+Caption:   Me in a beret
+  [[./assets/brittBeret.png]]
+* Some things I have written
+  Here is a link to an [[http://dx.doi.org/10.3389/fpsyg.2015.00321][article]].
+* And a file lower down.
+
+  Here it [[file:second.org][is]].
