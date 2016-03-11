@@ -1,20 +1,10 @@
-#+OPTIONS: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline
-#+OPTIONS: author:t c:nil creator:nil d:(not "LOGBOOK") date:t e:t
-#+OPTIONS: email:nil f:t inline:t num:t p:nil pri:nil prop:nil stat:t
-#+OPTIONS: tags:t tasks:t tex:t timestamp:t title:t toc:nil todo:t |:t
 #+TITLE: Cognitive Functor
-#+Subtitle: A structure preserving map from my mind to yours
-#+DATE: <2016-03-10 Thu>
-#+AUTHOR:
-#+EMAIL: britt@brittoffice.uwaterloo.ca
-#+LANGUAGE: en
-#+SELECT_TAGS: export
-#+EXCLUDE_TAGS: noexport
-#+CREATOR: Emacs 24.5.1 (Org mode 8.3.4)
-This is a simple index file
+#+AUTHOR: Britt Anderson
+A structure preserving map from my mind to yours
+* [[file:aboutme.org][About]]
+* [[file:blog.org][Blog]]
+    1. Org-page or Org-publish?
+    #+include: "blog/orgpage-orgpublish.org" :lines "4-9"
+    [[file:blog/orgpage-orgpublish.org][read more...]]
 
-* Here is a heading.
-
-* A little bit about [[file:aboutme.org][me]]
-
-
+* Miscellanies (tbd)

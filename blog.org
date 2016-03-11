@@ -1,0 +1,3 @@
+#+Title: Cognitive Functor
+* 2016
+  [[file:blog/orgpage-orgpublish.org][Org-page or Org-publish?]]

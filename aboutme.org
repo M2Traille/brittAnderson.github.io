@@ -1,13 +1,19 @@
-#+Title: Britt Anderson
-* An introductory test
-  My name is Britt Anderson
+#+Title: About
+Britt Anderson
+* Brief Bio
+  #+Caption: Currently, I live and work in Waterloo, Ontario Canada. While I very much enjoy Canada and its social values, one of the nicer things about Europe is that one can wear a beret, the world's most functional hat without getting starred at. 
+  #+Name:  Wouldn't look so yellow if I hadn't been impatient and properly washed out the fixative. 
+  #+Attr_html: :width 300 
+  #+Attr_html: :align center 
+  #+Attr_html: :alt Britt Anderson standing in a beret.
+  [[file:assets/brittBeret.png]]
 
-  This is what I look like in a beret.
+  [fn:beret]
 
-  #+Caption:   Me in a beret
-  [[./assets/brittBeret.png]]
-* Some things I have written
-  Here is a link to an [[http://dx.doi.org/10.3389/fpsyg.2015.00321][article]].
-* And a file lower down.
 
-  Here it [[file:second.org][is]].
+  Currently I am an associate professor at the [[https://uwaterloo.ca][University Waterloo]]. I am a member of the [[https://uwaterloo.ca/centre-for-theoretical-neuroscience/][Centre for Theoretical Neuroscience]] and the Department of Psychology, Division of [[https://uwaterloo.ca/psychology/research/research-areas/cognitive-neuroscience-psychology][Cognitive Neuroscience]].
+
+  For information that is more specifically related to my research as well as other information related to my research group, please see [[https://brittlab.uwaterloo.ca]]
+
+  
+[fn:beret] It is the most functional because it will keep you warm and protected from the sun. You can crush it in your pocket and it looks no worse for wear, and it is impossible to put on backwards.

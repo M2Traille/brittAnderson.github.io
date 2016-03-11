@@ -1,0 +1,59 @@
+#+Title: Org Page or Org Publish?
+#+Author: Britt Anderson
+* What do you want to do? 
+If you had come to this page in the first few days of March 2016 you would have found it created with org-page. The first two blog posts were on using org-page.
+
+Now you find it with org-publish. Why the change?
+
+I found that using org-page I was learning about using org-page, but what I really wanted to be doing was learning about org-mode and emacs. By transitioning to org-publish this website looks less polished, but I am learning things that will transfer to other use cases. The answer to which of the two you should use to blog really depends on what you want to do. 
+
+Links to particular programs and packages follow [[#blogging-tools-id][below]].
+
+If your use case is simply to get a functional, nice blog up and running quickly then I would *not* use emacs and org-mode. Just use something popular with good support and a large user base. My [[https://brittlab.uwaterloo.ca][lab site]] is a Jekyll website.  For broadening the experience of the students who work with me, Jekyll seems a more generic choice. They can learn about css, html and mark-up formatting without becoming bound to a particular, wonderful, but idiosyncratic text editor.
+
+If you want to write in org-mode for your blog, because you like it and you know it, and you just want a simple solution to translate that into a blog post, then I think org-page is a good choice. There are many other options that convert org files into something else (e.g. Jekyll), but then you really have to learn two things. How to blog in org-mode and convert to whatever markup is needed, and then how to use the other mechanism to create the static site. You can send org to Jekyll if you want to. With org-page you stay in the org world with a few less dependencies to fiddle with. It isn't hard /per se/, it is just one more thing to do. 
+
+Thus, if you are looking for an out-of-the-box solution for using emacs and org-mode to write blog posts, and you want to utilize github.io to host your pages, *and* you don't really care about how it is done, you just want it to work; then use org-page. You may have some headaches getting started. The documentation is spotty, but there are some brave souls who have ventured before you, and they give enough details to get you up and running. The most important factor contributing to your success will be to fully internalize the model behind org-pages. It is based on the idea of two git branches, one that tracks your source and one that tracks the displayed html. This is a different use of branches than a typical project. But once that is settled, and as long as your use case is a simple blogging set up you should be quickly up and running. I will also add that I had a question about org-pages and the maintainer provided quick, helpful, feedback. 
+
+Lastly, if you want to learn more about emacs, elisp and org-mode, and blogging is a secondary goal, then org-publish is the better choice. The org-publish mechanism can be used for much beyond this case, e.g. standardizing a latex export. And the set-up uses tools and ideas that will force you to learn a bit more. Why are you getting that error referring to  =characterp=? In my case, it was because I didn't realize that there was a difference between [[http://www.gnu.org/software/emacs/manual/html_node/elisp/Backquote.html][quotes and backquotes]]. In trying to make an ~:html-head-extra~ argument refer to a variable I learned about the comma syntax. Something that I feel would have been less likely using org-page. 
+
+In short, the tool you should use depends on the job you are doing. Simply want to blog - use Pelican or Jekyll or Wordpress. Only want to blog, but also want to write in org-mode without worrying about mark-up syntax compatability, use org-page. Want to learn about org-mode, emacs, and elisp and also blog, then use org-publish.
+
+** Sources
+   :Properties:
+   :Custom_id: blogging-tools-id
+   :END:
+   Nothing comprehensive. Just a few locations that helped to get me started.
+   
+*** General Blog Tools
+    - [[https://jekyllrb.com/][Jekyll]]
+      Might as well just go to the source
+    - [[http://blog.getpelican.com/][Pelican]]
+      Like Jekyll but python powered
+    - [[http://blogstarting.org/?utm_source=google&utm_medium=genericsearch&gclid=CKnQhZ-FucsCFQYNaQodIE8DIQ][Wordpress]]
+      Don't really see anything wrong with making your life easy, especially when you can make a site that is useful and helpful like [[http://www.inferencelab.com/][this]]. I won't be making anything like this with org-publish. I am not saying it can't be done, just that I can't do it, and doubt I ever could.
+
+*** Org-mode to Somethingelse
+    - [[http://orgmode.org/worg/org-tutorials/org-jekyll.html][Using org to Blog with Jekyll]]
+    - [[http://nhoffman.github.io/borborygmi/getting-started.html][borborygmi is Creating a site with Pelican and org-mode]]
+      In case you are curious borborygmi is the grumbling sound your stomach makes.
+    - [[https://github.com/punchagan/org2blog][Org2blog is a tool to publish from Emacs to WordPress.]]
+    - [[https://plugins.getnikola.com/#orgmode][A Nikola plugin exists for org-mode.]]
+
+*** Org Solo
+    - org-pages
+      - [[https://github.com/kelvinh/org-page][Kelvinh on github provides the package]]
+	And while there is a read me, I found the sites below to be more helpful.
+      - [[http://heikkil.github.io/blog/2015/03/28/understanding-org-page/][Heikki is Understand org-page]]
+	Until I found this post, I had no clue what was going on.
+      - [[http://codyreichert.github.io/blog/2015/07/05/blogging-with-emacs-and-org-mode/][The one true blog with org-mode]]
+	Actually just found this one. Didn't actually use it.
+    - org-publish
+      - [[http://bastibe.de/2013-11-13-blogging-with-emacs.html][Basti's Blogging with Emacs]]
+	Has a lot of nice examples, and a pretty methodical walkthrough. This is also where I found the example to put an extract on the home page.
+      - [[https://ogbe.net/blog/blogging_with_org.html][Dennis Ogbe is Blogging using org-mode (and nothing else)]]
+	Another methodical walk through. This one also has examples on generating an rss feed.
+      - [[http://nicolas-petton.fr/blog/blogging-with-org-mode.html][Nicolas Petton is Blogging with org-mode]]
+	Another very well documented example. The org-publish structure is very clean, and the use of elisp for personal variables and functions is demonstrated.
+      - [[http://emacs-doctor.com/blogging-from-emacs.html][M-x doctor RET Blogging from GNU Emacs]]
+	Another good demonstration of setting up an RSS feed, along with all the rest. 

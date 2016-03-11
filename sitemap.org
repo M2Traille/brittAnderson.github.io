@@ -1,2 +1,7 @@
 #+TITLE: Cognitive Functor
 
+   + [[file:aboutme.org][About (2016-03-11)]]
+   + [[file:index.org][Cognitive Functor (2016-03-11)]]
+   + [[file:blog.org][Cognitive Functor (2016-03-11)]]
+   + [[file:theindex.org][Index (2016-03-10)]]
+   + [[file:blog/orgpage-orgpublish.org][Org Page or Org Publish? (2016-03-11)]]
