@@ -1,0 +1,11 @@
+A few short notes on how I am trying to keep things up to date.
+
+First, I tried to get github.io to open a web page with a different default branch, but they weren't having any of it. 
+
+So I used orgpublish as the source branch. Since the html we want is all in the _site subdirectory we made a subtree with  this command.
+
+=git subtree split --prefix _site -b split=
+
+This worked so I merged it into master, and then I pushed master back to github and made sure it was set as default. Now I can see the website.
+
+To edit code on my machine I need to be on the orgpublish branch. 
