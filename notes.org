@@ -1,11 +1,19 @@
 A few short notes on how I am trying to keep things up to date.
 
-First, I tried to get github.io to open a web page with a different default branch, but they weren't having any of it. 
+One problem with how I have done things is that the files I want to deploy are in a sub directory, but I would like to track all files for version control. I am trying a variant of something from org-page.
 
-So I used orgpublish as the source branch. Since the html we want is all in the _site subdirectory we made a subtree with  this command.
+I create a branch that I called orgpublish that has all the files. Having done this, and having deleted all branches - including the master branch - I then created the master with 
 
-=git subtree split --prefix _site -b split=
+~git subtree split --squash --prefix _site -b master~
 
-This worked so I merged it into master, and then I pushed master back to github and made sure it was set as default. Now I can see the website.
+Then I had to use force to get the origin (that is the github repo) synced up again. 
 
-To edit code on my machine I need to be on the orgpublish branch. 
+~git push --force origin master~
+
+At this point I should be able to checkout orgpublish, commit all changes, then ~git subtree push --squash --prefix _site /home/britt/gitRepos/brittAnderson-github/ master~
+
+And then a simple ~git push --all origin~ should update things for both branches.
+
+The reason for the directory name is you have to provide the repo name and your local repo has the name of its parent directory (unless you set up some sort of an alias). 
+
+
