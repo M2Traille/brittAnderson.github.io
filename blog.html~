@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <title>Cognitive Functor</title>
-<!-- 2016-03-11 Fri 14:07 -->
+<!-- 2016-04-14 Thu 08:02 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="Org-mode">
@@ -201,6 +201,7 @@ $(function() {
 <div class="outline-text-2" id="text-1">
 <p>
 <a href="blog/orgpage-orgpublish.html">Org-page or Org-publish?</a>
+<a href="blog/deciding-what-we-mean-by-deciding.html">What is Risk? What is a Decision?</a>
 </p>
 </div>
 </div>
@@ -213,7 +214,7 @@ $(function() {
 </nav>
 </div></div></div>
 <footer id="postamble" class="">
-<div><p class="date">Created: 2016-03-11 Fri 14:07</p>
+<div><p class="date">Created: 2016-04-14 Thu 08:02</p>
 </div>
 </footer>
 </body>
