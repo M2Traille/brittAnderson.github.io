@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>What is risk? Which decisions are the important ones?</title>
+<!-- 2016-04-14 Thu 08:02 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="Org-mode">
+<meta name="author" content="Britt Anderson">
+
+<link  href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<style type="text/css">
+/* org mode styles on top of twbs */
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    font-size: 18px;
+    margin-bottom: 105px;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 101px;
+    background-color: #f5f5f5;
+}
+
+footer > div {
+    padding: 10px;
+}
+
+footer p {
+    margin: 0 0 5px;
+    text-align: center;
+    font-size: 16px;
+}
+
+#table-of-contents {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+blockquote p {
+    font-size: 18px;
+}
+
+pre {
+    font-size: 16px;
+}
+
+.footpara {
+    display: inline-block;
+}
+
+figcaption {
+  font-size: 16px;
+  color: #666;
+  font-style: italic;
+  padding-bottom: 15px;
+}
+
+/* from twbs docs */
+
+.bs-docs-sidebar.affix {
+    position: static;
+}
+@media (min-width: 768px) {
+    .bs-docs-sidebar {
+        padding-left: 20px;
+    }
+}
+
+/* All levels of nav */
+.bs-docs-sidebar .nav > li > a {
+    display: block;
+    padding: 4px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #999;
+}
+.bs-docs-sidebar .nav > li > a:hover,
+.bs-docs-sidebar .nav > li > a:focus {
+    padding-left: 19px;
+    color: #A1283B;
+    text-decoration: none;
+    background-color: transparent;
+    border-left: 1px solid #A1283B;
+}
+.bs-docs-sidebar .nav > .active > a,
+.bs-docs-sidebar .nav > .active:hover > a,
+.bs-docs-sidebar .nav > .active:focus > a {
+    padding-left: 18px;
+    font-weight: bold;
+    color: #A1283B;
+    background-color: transparent;
+    border-left: 2px solid #A1283B;
+}
+
+/* Nav: second level (shown on .active) */
+.bs-docs-sidebar .nav .nav {
+    display: none; /* Hide by default, but at >768px, show it */
+    padding-bottom: 10px;
+}
+.bs-docs-sidebar .nav .nav > li > a {
+    padding-top: 1px;
+    padding-bottom: 1px;
+    padding-left: 30px;
+    font-size: 12px;
+    font-weight: normal;
+}
+.bs-docs-sidebar .nav .nav > li > a:hover,
+.bs-docs-sidebar .nav .nav > li > a:focus {
+    padding-left: 29px;
+}
+.bs-docs-sidebar .nav .nav > .active > a,
+.bs-docs-sidebar .nav .nav > .active:hover > a,
+.bs-docs-sidebar .nav .nav > .active:focus > a {
+    padding-left: 28px;
+    font-weight: 500;
+}
+
+/* Nav: third level (shown on .active) */
+.bs-docs-sidebar .nav .nav .nav {
+    padding-bottom: 10px;
+}
+.bs-docs-sidebar .nav .nav .nav > li > a {
+    padding-top: 1px;
+    padding-bottom: 1px;
+    padding-left: 40px;
+    font-size: 12px;
+    font-weight: normal;
+}
+.bs-docs-sidebar .nav .nav .nav > li > a:hover,
+.bs-docs-sidebar .nav .nav .nav > li > a:focus {
+    padding-left: 39px;
+}
+.bs-docs-sidebar .nav .nav .nav > .active > a,
+.bs-docs-sidebar .nav .nav .nav > .active:hover > a,
+.bs-docs-sidebar .nav .nav .nav > .active:focus > a {
+    padding-left: 38px;
+    font-weight: 500;
+}
+
+/* Show and affix the side nav when space allows it */
+@media (min-width: 992px) {
+    .bs-docs-sidebar .nav > .active > ul {
+        display: block;
+    }
+    /* Widen the fixed sidebar */
+    .bs-docs-sidebar.affix,
+    .bs-docs-sidebar.affix-bottom {
+        width: 213px;
+    }
+    .bs-docs-sidebar.affix {
+        position: fixed; /* Undo the static from mobile first approach */
+        top: 20px;
+    }
+    .bs-docs-sidebar.affix-bottom {
+        position: absolute; /* Undo the static from mobile first approach */
+    }
+    .bs-docs-sidebar.affix .bs-docs-sidenav,.bs-docs-sidebar.affix-bottom .bs-docs-sidenav {
+        margin-top: 0;
+        margin-bottom: 0
+    }
+}
+@media (min-width: 1200px) {
+    /* Widen the fixed sidebar again */
+    .bs-docs-sidebar.affix-bottom,
+    .bs-docs-sidebar.affix {
+        width: 263px;
+    }
+}
+</style>
+<script type="text/javascript">
+$(function() {
+    'use strict';
+
+    $('.bs-docs-sidebar li').first().addClass('active');
+
+    $(document.body).scrollspy({target: '.bs-docs-sidebar'});
+
+    $('.bs-docs-sidebar').affix();
+});
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href=""> UP </a>
+ |
+ <a accesskey="H" href="/index.html"> HOME </a>
+</div><div id="content" class="container">
+<div class="row"><div class="col-md-9"><h1 class="title">What is risk? Which decisions are the important ones?</h1>
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Nucleus Accumbens and Risky Decisions</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+The source of these ideas was a recent article in <a href="http://dx.doi.org/10.1038/nature17400">Nature</a>. The article is very nice, but it got me thinking about how some scientific terms re-purpose everyday language, and how this might have lead to certain confusions. Also, some terms are so broad that several independent concepts can fall under the same label. When research addresses one of those concepts we occassionaly we feel we have learned something about all the others that fall under the same heading. 
+</p>
+</div>
+</div>
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Risk</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+In every day discourse when we think of someone taking a risk, we often think there is a good chance they could fail, and that that failure could have important negative consequences. There is also often a sense that great gains are possible. When we talk about risk takers we might have in mind those who <a href="http://www.nytimes.com/2015/03/11/magazine/the-heart-stopping-climbs-of-alex-honnold.html?_r=0">climb cliffs without support</a> or <a href="https://en.wikipedia.org/wiki/BASE_jumping">leap off mountains and paraglide down</a>. This is not the technical definition of risk. It is not the way Zalocusky et al. use the term. For decision making research risk is often taken as the known uncertainty, the variance in the reward distribution. In their paper, Zalocusky et al exposed rats to a decision making environment in which average reward was the same, but the rats could either choose to press a lever with a small constant amount of sugar water or another risky lever that gave large rewards a quarter of the time, and smaller rewards otherwise. Their use of term risk is rigorous and clear, it is just not the way we use the word risk in our everyday discussions of decision making. The average reward of the base jumper is not the same as the chap sitting in the Chalet sipping chocolat chaud and watching. <a href="http://www.dailymail.co.uk/news/article-3493687/Leading-BASE-jumper-killed-instantly-leap-heavy-fog-10-000ft-mountain-Switzerland-goes-wrong.html">Even experienced base jumpers may die.</a> People who engage in repetitive gambling frequently go broke. The risky decisions in our everyday life that motivate our interest in questions of risk and decisions in laboratories are not using the word "risk". At least it is not clear to me that the neurons driving some rats to choose a lever with high variance in sugar return while others choose a constant sugar reward are the same neurons that motivate some people to play slots to bankruptcy and others to jump off mountains risking death, though the language we use in the academic domain might lead many general readers to assume they were <sup><a id="fnr.1" name="fnr.1" class="footref" href="#fn.1">1</a></sup>
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Decision-making</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+This is another question about language. We refer to choosing who to marry or where to go to graduate school as making a decision. We also talk about a baseball pitcher deciding what pitch to throw as making a decision. Based on the language we use we might think we were describing the same "thing" in both cases, but are we? A professional starting baseball pitcher might throw 100 pitches in a game, and might pitch in 30 games a season. In between his practice is more of the same: deciding on a pitch, and then throwing that pitch. This seems quite similar to the repetitive, similar choices made by the rats in Zalocusky et al's experiment<sup><a id="fnr.2" name="fnr.2" class="footref" href="#fn.2">2</a></sup>. 
+</p>
+
+<p>
+Isn't this significantly different than the other types of decisions I listed? When choosing a mate there is no repetition. It is one and done. Even if you grow dissatisfied with your partner, leave them and choose another it is not the same decision - at least not in the way that repetitively choosing a lever for a sugar reward is. You are older. You are changed by the consequences of that choice. You might choose a mate more than once, but you are not making the same choice twice. At least it must be conceded the choices are not <a href="https://en.wikipedia.org/wiki/Independent_and_identically_distributed_random_variables">i.i.d.</a> <sup><a id="fnr.3" name="fnr.3" class="footref" href="#fn.3">3</a></sup>. 
+</p>
+
+<p>
+Why should we assume decisions of the first, i.i.d., type are the same as the one-off life changing sort? The i.i.d. type are the one studied in laboratories with rats pushing levers and people playing <a href="http://dx.doi.org/10.1371/journal.pone.0017798">empathy games</a>. Are those studies informing us of the mechansims that underlie our decisions in the apparently one-off choices we have to make?
+</p>
+
+<p>
+The answer I am usually given when I ask this question is that our one-off choices are similar too other choices we have made in the past. Choosing a mate is similar to choosing a prom date. It is similar to asking someone to the movies. It is similar to choosing a pet. And so on. The similarity differs, but they are enough alike that this decision history provides the shaping that leads to the preferences we express when selecting to whom, and whether, to propose. But that verbal argument does not persuade. The dimensionality of the space where decisions have to be mapped, be it neurophysiological (the voltage of everyone neuron in your brain at every picosecond of existence) or psychological (the day was gray, you were in a bad mood) though finite is likely to be very large. And such a space is likely to be very sparsely populated (the so-called curse of dimensionality). How are we to effectively measure similarity in such a space? To learn what is similiar? To even learn what dimensions of the space "matter" and for what kind of decisions? It doesn't seem too improbable to think that a few thousand repetitive lever pressess of a rat for sugar water end up "near-by" in this high dimensional space, but are those points near the points needed when the rat has to decide whether to fight another for dominance? How would we know?
+</p>
+
+<p>
+This is not a critique of the paper. This is a critique of how we use the results from such papers. We are generally too incautious in our extrapolations. Just because a research article deals with "decision-making" does not mean we should generalize its findings to the types of decisions that most of us spend our lives agonizing over. Where are the similar decisions, and how many repetitions does one get when deciding "To be or not to be"? 
+</p>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" name="fn.1" class="footnum" href="#fnr.1">1</a></sup> <p class="footpara">
+Another claim in the article is that the rats showed individual differences. Some rats preferred the high variance lever and others the constant lever. But recall that each lever led to the same average return. Couldn't the two levers represent two equivalent local minima in the behavioral space? If so, might it not be that rats did not <i>initially</i> posses intrinsic differences that led them to seek or avoid risk, but that some random variation led some rats to one fixed point and other rats to the other fixed point? The changes in neuronal activity then might have been the <b>result</b> of where they ended up, and not what led them there? Of course, this question is rather orthogonal to the point about language I am making above.
+</p></div>
+
+<div class="footdef"><sup><a id="fn.2" name="fn.2" class="footnum" href="#fnr.2">2</a></sup> <p class="footpara">
+Though it is not clear that any sequence of choices by the pitcher would lead to the same average reward. Mighn't this be important?
+</p></div>
+
+<div class="footdef"><sup><a id="fn.3" name="fn.3" class="footnum" href="#fnr.3">3</a></sup> <p class="footpara">
+I was led to this thinking by G.L.S. Shackle. See his <a href="http://www.cambridge.org/ca/academic/subjects/economics/history-economic-thought-and-methodology/decision-order-and-time-human-affairs-2nd-edition?format=PB">Decision, Order, and Time in Human Affairs.</a>
+</p></div>
+
+
+</div>
+</div></div><div class="col-md-3"><nav id="table-of-contents">
+<div id="text-table-of-contents" class="bs-docs-sidebar">
+<ul class="nav">
+<li><a href="#sec-1">1. Nucleus Accumbens and Risky Decisions</a></li>
+<li><a href="#sec-2">2. Risk</a></li>
+<li><a href="#sec-3">3. Decision-making</a></li>
+</ul>
+</div>
+</nav>
+</div></div></div>
+<footer id="postamble" class="">
+<div><p class="author">Author: Britt Anderson</p>
+<p class="date">Created: 2016-04-14 Thu 08:02</p>
+</div>
+</footer>
+</body>
+</html>

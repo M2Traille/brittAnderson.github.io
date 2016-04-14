@@ -1,3 +1,5 @@
 #+Title: Cognitive Functor
 * 2016
-  [[file:blog/orgpage-orgpublish.org][Org-page or Org-publish?]]
+  1. [[file:blog/orgpage-orgpublish.org][Org-page or Org-publish?]]
+  2. [[file:blog/deciding-what-we-mean-by-deciding.org][What is Risk? What is a Decision?]]
+

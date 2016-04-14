@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <title>Cognitive Functor</title>
-<!-- 2016-03-11 Fri 14:07 -->
+<!-- 2016-04-14 Thu 08:02 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="Org-mode">
@@ -208,11 +208,7 @@ A structure preserving map from my mind to yours
 <div class="outline-text-2" id="text-2">
 <ol class="org-ol">
 <li>Org-page or Org-publish?
-</li>
-</ol>
-<p>
 If you had come to this page in the first few days of March 2016 you would have found it created with org-page. The first two blog posts were on using org-page.
-</p>
 
 <p>
 Now you find it with org-publish. Why the change?
@@ -222,6 +218,12 @@ Now you find it with org-publish. Why the change?
 I found that using org-page I was learning about using org-page, but what I really wanted to be doing was learning about org-mode and emacs. By transitioning to org-publish this website looks less polished, but I am learning things that will transfer to other use cases. The answer to which of the two you should use to blog really depends on what you want to do. 
 <a href="blog/orgpage-orgpublish.html">read more&#x2026;</a>
 </p>
+</li>
+<li>What is Risk? What is a Decision?
+The source of these ideas was a recent article in <a href="http://dx.doi.org/10.1038/nature17400">Nature</a>. The article is very nice, but it got me thinking about how some scientific terms re-purpose everyday language, and how this might have lead to certain confusions. Also, some terms are so broad that several independent concepts can fall under the same label. When research addresses one of those concepts we occassionaly we feel we have learned something about all the others that fall under the same heading. 
+<a href="blog/deciding-what-we-mean-by-deciding.html">read more &#x2026;</a>
+</li>
+</ol>
 </div>
 </div>
 
@@ -240,7 +242,7 @@ I found that using org-page I was learning about using org-page, but what I real
 </div></div></div>
 <footer id="postamble" class="">
 <div><p class="author">Author: Britt Anderson</p>
-<p class="date">Created: 2016-03-11 Fri 14:07</p>
+<p class="date">Created: 2016-04-14 Thu 08:02</p>
 </div>
 </footer>
 </body>

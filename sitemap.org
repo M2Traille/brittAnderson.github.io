@@ -1,7 +1,8 @@
 #+TITLE: Cognitive Functor
 
-   + [[file:theindex.org][Index (2016-03-11)]]
-   + [[file:index.org][Cognitive Functor (2016-03-11)]]
-   + [[file:blog.org][Cognitive Functor (2016-03-11)]]
-   + [[file:aboutme.org][About (2016-03-11)]]
-   + [[file:blog/orgpage-orgpublish.org][Org Page or Org Publish? (2016-03-11)]]
+   + [[file:blog.org][Cognitive Functor (2016-04-14)]]
+   + [[file:index.org][Cognitive Functor (2016-04-14)]]
+   + [[file:theindex.org][Index (2016-04-13)]]
+   + [[file:aboutme.org][About (2016-04-13)]]
+   + [[file:blog/deciding-what-we-mean-by-deciding.org][What is risk? Which decisions are the important ones? (2016-04-14)]]
+   + [[file:blog/orgpage-orgpublish.org][Org Page or Org Publish? (2016-04-13)]]
