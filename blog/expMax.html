@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>Expectation Maximization</title>
+<!-- 2016-06-15 Wed 17:30 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="Org-mode">
+<meta name="author" content="Britt Anderson">
+
+<link  href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<style type="text/css">
+/* org mode styles on top of twbs */
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    font-size: 18px;
+    margin-bottom: 105px;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 101px;
+    background-color: #f5f5f5;
+}
+
+footer > div {
+    padding: 10px;
+}
+
+footer p {
+    margin: 0 0 5px;
+    text-align: center;
+    font-size: 16px;
+}
+
+#table-of-contents {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+blockquote p {
+    font-size: 18px;
+}
+
+pre {
+    font-size: 16px;
+}
+
+.footpara {
+    display: inline-block;
+}
+
+figcaption {
+  font-size: 16px;
+  color: #666;
+  font-style: italic;
+  padding-bottom: 15px;
+}
+
+/* from twbs docs */
+
+.bs-docs-sidebar.affix {
+    position: static;
+}
+@media (min-width: 768px) {
+    .bs-docs-sidebar {
+        padding-left: 20px;
+    }
+}
+
+/* All levels of nav */
+.bs-docs-sidebar .nav > li > a {
+    display: block;
+    padding: 4px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #999;
+}
+.bs-docs-sidebar .nav > li > a:hover,
+.bs-docs-sidebar .nav > li > a:focus {
+    padding-left: 19px;
+    color: #A1283B;
+    text-decoration: none;
+    background-color: transparent;
+    border-left: 1px solid #A1283B;
+}
+.bs-docs-sidebar .nav > .active > a,
+.bs-docs-sidebar .nav > .active:hover > a,
+.bs-docs-sidebar .nav > .active:focus > a {
+    padding-left: 18px;
+    font-weight: bold;
+    color: #A1283B;
+    background-color: transparent;
+    border-left: 2px solid #A1283B;
+}
+
+/* Nav: second level (shown on .active) */
+.bs-docs-sidebar .nav .nav {
+    display: none; /* Hide by default, but at >768px, show it */
+    padding-bottom: 10px;
+}
+.bs-docs-sidebar .nav .nav > li > a {
+    padding-top: 1px;
+    padding-bottom: 1px;
+    padding-left: 30px;
+    font-size: 12px;
+    font-weight: normal;
+}
+.bs-docs-sidebar .nav .nav > li > a:hover,
+.bs-docs-sidebar .nav .nav > li > a:focus {
+    padding-left: 29px;
+}
+.bs-docs-sidebar .nav .nav > .active > a,
+.bs-docs-sidebar .nav .nav > .active:hover > a,
+.bs-docs-sidebar .nav .nav > .active:focus > a {
+    padding-left: 28px;
+    font-weight: 500;
+}
+
+/* Nav: third level (shown on .active) */
+.bs-docs-sidebar .nav .nav .nav {
+    padding-bottom: 10px;
+}
+.bs-docs-sidebar .nav .nav .nav > li > a {
+    padding-top: 1px;
+    padding-bottom: 1px;
+    padding-left: 40px;
+    font-size: 12px;
+    font-weight: normal;
+}
+.bs-docs-sidebar .nav .nav .nav > li > a:hover,
+.bs-docs-sidebar .nav .nav .nav > li > a:focus {
+    padding-left: 39px;
+}
+.bs-docs-sidebar .nav .nav .nav > .active > a,
+.bs-docs-sidebar .nav .nav .nav > .active:hover > a,
+.bs-docs-sidebar .nav .nav .nav > .active:focus > a {
+    padding-left: 38px;
+    font-weight: 500;
+}
+
+/* Show and affix the side nav when space allows it */
+@media (min-width: 992px) {
+    .bs-docs-sidebar .nav > .active > ul {
+        display: block;
+    }
+    /* Widen the fixed sidebar */
+    .bs-docs-sidebar.affix,
+    .bs-docs-sidebar.affix-bottom {
+        width: 213px;
+    }
+    .bs-docs-sidebar.affix {
+        position: fixed; /* Undo the static from mobile first approach */
+        top: 20px;
+    }
+    .bs-docs-sidebar.affix-bottom {
+        position: absolute; /* Undo the static from mobile first approach */
+    }
+    .bs-docs-sidebar.affix .bs-docs-sidenav,.bs-docs-sidebar.affix-bottom .bs-docs-sidenav {
+        margin-top: 0;
+        margin-bottom: 0
+    }
+}
+@media (min-width: 1200px) {
+    /* Widen the fixed sidebar again */
+    .bs-docs-sidebar.affix-bottom,
+    .bs-docs-sidebar.affix {
+        width: 263px;
+    }
+}
+</style>
+<script type="text/javascript">
+$(function() {
+    'use strict';
+
+    $('.bs-docs-sidebar li').first().addClass('active');
+
+    $(document.body).scrollspy({target: '.bs-docs-sidebar'});
+
+    $('.bs-docs-sidebar').affix();
+});
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href=""> UP </a>
+ |
+ <a accesskey="H" href="/index.html"> HOME </a>
+</div><div id="content" class="container">
+<div class="row"><div class="col-md-9"><h1 class="title">Expectation Maximization</h1>
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> EM Algorithm and Haskell</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Two things on my to-do list have been to spend a little more time with the <a href="https://en.wikipedia.org/wiki/Expectation%E2%80%93maximization_algorithm">EM algorithm</a>, and force myself to try and experiment with <a href="https://www.haskell.org/">Haskell</a>. 
+In addition, as if those two goals weren't sufficient, I have been wanting to cement my orgmode and emacs facility with the idea of trying to pile all this together so as to become more fluid at producing <a href="http://link.springer.com/chapter/10.1007/978-1-4612-2544-7_5">reproducible research</a> <sup><a id="fnr.1" name="fnr.1" class="footref" href="#fn.1">1</a></sup>. So that explains this blog entry in this format. 
+</p>
+
+<p>
+The stimulus for this entry was an <a href="https://ogbe.net/blog/sloppy_papers.html">excellent post</a> by Dennis Ogbe. Much of his post dealt with the excellent point that authors can be sloppy, and this can greatly discourage students, who have, probably correctly, a bias to suspect themselves first when disagreeing with the "book." I recommend reading this post and looking at the <a href="http://ieeexplore.ieee.org/xpl/login.jsp?tp=&amp;arnumber=543975&amp;url=http%3A%2F%2Fieeexplore.ieee.org%2Fxpls%2Fabs_all.jsp%3Farnumber%3D543975">article</a>, because the number of typos is truly frightening, and it is even more than Dennis points out. 
+</p>
+
+<p>
+But in addition to giving a useful cautionary note Dennis also wrote some Python code to implement the EM algorithm for solving the toy example in the paper. I don't wish to repeat his excellent explanation about the algorithm, but I did think it would be a good exercise to recreate it in Haskell.
+</p>
+
+<p>
+Note that by and large this effort is for myself. I am purposely trying to use different aspects of the language that are odd or unfamiliar to me so that I can understand them better, and make better use of them when they would be helpful. For most of what is here these things are definitely likely to be overkill. But we beginners can always use more concrete examples, and I am posting these here in case they might eventually help one or two people. In general, you are probably better just using a pre-writen <a href="https://hackage.haskell.org/package/statistics">library</a>.  
+</p>
+</div>
+<div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Orgmode and Haskell</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+A nice feature of orgmode is the ability to publish. Which is how this blog is being generated. A second great feature is the ability to embed code into the org file itself. Then the org file becomes not just a record of of the code, but can be the code itself. I found this to work extremely well with R and ESS where there is excellent integration and the idea of an interpreted, iterative session make sense. This is not the case with Haskell. Orgmode uses ghci to interpret the code. This means things like variable declarations need to be preceded with <code>let</code>. This make things look ugly, but worse it means that you cannot just use the source file as a module in the orgfile. Here is how I worked around.
+</p>
+
+<p>
+First, I loaded the source file that has the variables and functions I want to use in this post. This initiates a haskell session. I tried to rename the session, but that never seemed to work. Now all our code and functions are in an inferior ghci session somewhere in emacs (should be called \*haskell\* if you want to look for the buffer).
+</p>
+<div class="org-src-container">
+
+<pre class="src src-haskell"><span style="color: #228b22;">:</span>load <span style="color: #8b2252;">"/home/britt/haskell/temp/Em/src/Em"</span>
+</pre>
+</div>
+
+<p>
+The toy problem features two categories of stimuli: light and dark. There is a meter to detect those, but there are two subclasses of dark objects, square and round, and our meter doesn't distinguish those. I used the data declaration to set up types that we can use to represent these entities. Even though we know that the number of objects, must be a whole number, we are going to need floats for the algorithm so that is the reason for the <code>Double</code>. In addition, we create a synonym for our probability distribution which will represent the probability of each of the three underlying entities: dark squares, dark round things, and light things.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-haskell"><span style="color: #a020f0;">data</span> <span style="color: #228b22;">ObjShape</span> <span style="color: #a0522d;">=</span> <span style="color: #228b22;">ObjShape</span> { round <span style="color: #a0522d;">::</span> <span style="color: #228b22;">Double</span>, square <span style="color: #a0522d;">::</span><span style="color: #228b22;">Double</span> }
+                <span style="color: #a020f0;">deriving</span> (<span style="color: #228b22;">Show</span>,<span style="color: #228b22;">Eq</span>)
+
+<span style="color: #a020f0;">data</span> <span style="color: #228b22;">ObjShade</span> <span style="color: #a0522d;">=</span> <span style="color: #228b22;">ObjShade</span> { dark  <span style="color: #a0522d;">::</span> <span style="color: #228b22;">ObjShape</span>, light <span style="color: #a0522d;">::</span> <span style="color: #228b22;">Double</span>}
+                  <span style="color: #a020f0;">deriving</span> (<span style="color: #228b22;">Show</span>,<span style="color: #228b22;">Eq</span>)
+
+<span style="color: #a020f0;">type</span> <span style="color: #228b22;">Pdist</span> <span style="color: #a0522d;">=</span> (<span style="color: #228b22;">Double</span>,<span style="color: #228b22;">Double</span>,<span style="color: #228b22;">Double</span>)
+</pre>
+</div>
+
+
+<p>
+This shows how we can use our constructors to create values of our types. The test data is the initial guess made for the toy problem. The true value is shown as well.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-haskell"><span style="color: #0000ff;">trueDat</span> <span style="color: #a0522d;">=</span> <span style="color: #228b22;">ObjShade</span> (<span style="color: #228b22;">ObjShape</span> 25.0 38.0) 37.0
+<span style="color: #0000ff;">testDat</span> <span style="color: #a0522d;">=</span> <span style="color: #228b22;">ObjShade</span> (<span style="color: #228b22;">ObjShape</span> 31.5 31.5) 37.0
+</pre>
+</div>
+
+<p>
+We can evaluate in orgmode some haskell and print the output as a result. Let's look at one of the values we constructed.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-haskell">trueDat
+</pre>
+</div>
+
+<pre class="example">
+ObjShade {dark = ObjShape {round = 25.0, square = 38.0}, light = 37.0}
+</pre>
+
+<p>
+Though reviewing the EM algorithm is not the goal of this post, things may not make sense without a little bit of context. The logic to the EM approach assumes the existence of hidden variables. If there aren't any, we make some up. We then use our data to compute the likely value for our parameter, here the probability distribution for each object type. Here the distribution is given to us. I wrote it as a <a href="https://wiki.haskell.org/Anonymous_function">lambda function</a> just for practice. I could have said <code>ps p = ...</code> just as well.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-haskell"><span style="color: #0000ff;">ps</span> <span style="color: #a0522d;">::</span> <span style="color: #228b22;">Double</span> <span style="color: #a0522d;">-&gt;</span> <span style="color: #228b22;">Pdist</span>
+<span style="color: #0000ff;">ps</span> <span style="color: #a0522d;">=</span> <span style="color: #a0522d;">\</span>p <span style="color: #a0522d;">-&gt;</span> (1<span style="color: #a0522d;">/</span>4,1<span style="color: #a0522d;">/</span>4<span style="color: #a0522d;">+</span>p<span style="color: #a0522d;">/</span>4,1<span style="color: #a0522d;">/</span>2<span style="color: #a0522d;">-</span>p<span style="color: #a0522d;">/</span>4)
+</pre>
+</div>
+
+<p>
+This is just a convenience function that we will need to count the types of our different objects so we can update our parameter estimate. Again we are using a lamda format to specifiy the function. I am also using functions from the <code>Control.Applicative</code> module so that I can apply the two accessor functions we created with our data declaration above. When we use <code>dark</code> on a value of type <code>ObjShade</code> we get the dark value. We are going to put that into a list context here (because List is in the Functor type class). This is going to act like a sort of <code>map</code> where we can apply each of the functions to our <code>ObjShape</code> value, and then we sum things up. 
+</p>
+<div class="org-src-container">
+
+<pre class="src src-haskell"><span style="color: #0000ff;">countObjs</span> <span style="color: #a0522d;">::</span> <span style="color: #228b22;">ObjShade</span> <span style="color: #a0522d;">-&gt;</span> <span style="color: #228b22;">Double</span>
+<span style="color: #0000ff;">countObjs</span>  <span style="color: #a0522d;">=</span> <span style="color: #a0522d;">\</span>x <span style="color: #a0522d;">-&gt;</span> sum <span style="color: #a0522d;">$</span> [Em.round , square] <span style="color: #a0522d;">&lt;*&gt;</span> (pure <span style="color: #a0522d;">.</span> dark) x
+</pre>
+</div>
+
+<p>
+For our maximization step we are going to find the probability parameter that maximizes things, which requires taking a derivative - that is why things look a little different. And for the expectation step, we find the expected number of each "thing" given our maximized probability paramter. And then we repeat.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-haskell"><span style="color: #0000ff;">mstep</span> <span style="color: #a0522d;">::</span> <span style="color: #228b22;">ObjShade</span> <span style="color: #a0522d;">-&gt;</span> <span style="color: #228b22;">Pdist</span>
+<span style="color: #0000ff;">mstep</span>  os <span style="color: #a0522d;">=</span> ps <span style="color: #a0522d;">$</span> (2.0 <span style="color: #a0522d;">*</span> fx <span style="color: #a0522d;">-</span> fy) <span style="color: #a0522d;">/</span> (fx <span style="color: #a0522d;">+</span> fy)
+  <span style="color: #a020f0;">where</span> fx <span style="color: #a0522d;">=</span> (square <span style="color: #a0522d;">.</span> dark) os
+        fy <span style="color: #a0522d;">=</span> light os
+
+<span style="color: #0000ff;">estep</span> <span style="color: #a0522d;">::</span> <span style="color: #228b22;">Pdist</span> <span style="color: #a0522d;">-&gt;</span> <span style="color: #228b22;">ObjShade</span> <span style="color: #a0522d;">-&gt;</span> <span style="color: #228b22;">ObjShade</span>
+<span style="color: #0000ff;">estep</span> pd<span style="color: #a0522d;">@</span>(p1,p2,p3) os <span style="color: #a0522d;">=</span> <span style="color: #228b22;">ObjShade</span> {dark <span style="color: #a0522d;">=</span> newd , light <span style="color: #a0522d;">=</span> light os}
+  <span style="color: #a020f0;">where</span>
+    nd <span style="color: #a0522d;">=</span> countObjs os 
+    news <span style="color: #a0522d;">=</span> nd <span style="color: #a0522d;">*</span> p2 <span style="color: #a0522d;">/</span> (p1 <span style="color: #a0522d;">+</span> p2)
+    newr <span style="color: #a0522d;">=</span> nd <span style="color: #a0522d;">*</span> p1 <span style="color: #a0522d;">/</span> (p1 <span style="color: #a0522d;">+</span> p2)
+    newd <span style="color: #a0522d;">=</span> <span style="color: #228b22;">ObjShape</span> {square <span style="color: #a0522d;">=</span> news, Em.round <span style="color: #a0522d;">=</span> newr}
+
+<span style="color: #0000ff;">step</span> <span style="color: #a0522d;">::</span> <span style="color: #228b22;">ObjShade</span> <span style="color: #a0522d;">-&gt;</span> <span style="color: #228b22;">ObjShade</span>
+<span style="color: #0000ff;">step</span> <span style="color: #a0522d;">=</span> <span style="color: #a0522d;">\</span>os <span style="color: #a0522d;">-&gt;</span> estep (mstep os) os
+
+<span style="color: #0000ff;">steps</span> <span style="color: #a0522d;">::</span> [<span style="color: #228b22;">ObjShade</span>] <span style="color: #a0522d;">-&gt;</span> [<span style="color: #228b22;">ObjShade</span>]
+<span style="color: #0000ff;">steps</span> [x] <span style="color: #a0522d;">=</span> steps <span style="color: #a0522d;">$</span> x<span style="color: #228b22;">:</span>[step x]
+<span style="color: #0000ff;">steps</span> xs <span style="color: #a0522d;">=</span> (init xs) <span style="color: #a0522d;">++</span> steps [last xs]
+</pre>
+</div>
+<p>
+The <code>estep</code> and <code>mstep</code> functions do their thing, and I used the <code>where</code> statement to hopefully keep things a bit more readable and clean.
+</p>
+
+<p>
+The <code>step</code> function implements one single step, and then the <code>steps</code> function does this <i>ad infinitum</i>. Breaking everything up like this was just a design choice. I purposely made the <code>steps</code> function infinitely repeating, because I really like the idea of lazy evaluation. I actually think it could be a feature of human cogntion too. It took me an embarrasinly long time to figure out how to write this <a href="http://learnyouahaskell.com/recursion">recursively</a>. 
+</p>
+
+
+<p>
+As with most languages that I have used, you often end up writing more to visualize your output than you needed to create the output. But practice makes perfect, so I wrote some functions to parse the data from our <code>ObjShade</code> values so that we could compare the estimates generated here with those produce in the article and by Dennis. First we get the values for the different things out of the data value so we can use them. Then we map the insertion of the pipe character between the numbers. This lets us do the whole thing in one shot without a loop. The show command is just a way to turn numbers into strings for printing. Lastly, I just prepend a first row with labels. Again we use the applicative technique. We also curry the <code>++</code> function so that even though we write it first, it is actually sticking a newline at the end. 
+</p>
+<div class="org-src-container">
+
+<pre class="src src-haskell"><span style="color: #0000ff;">oshd2dos</span> <span style="color: #a0522d;">::</span> <span style="color: #228b22;">ObjShade</span> <span style="color: #a0522d;">-&gt;</span> [<span style="color: #228b22;">Double</span>]
+<span style="color: #0000ff;">oshd2dos</span> <span style="color: #a0522d;">=</span>  <span style="color: #a0522d;">\</span>x <span style="color: #a0522d;">-&gt;</span> (m <span style="color: #a0522d;">++</span> [light]) <span style="color: #a0522d;">&lt;*&gt;</span> pure x
+  <span style="color: #a020f0;">where</span> m <span style="color: #a0522d;">=</span> map (<span style="color: #a0522d;">.</span> dark) [Em.round,square]
+
+<span style="color: #0000ff;">dos2strRow</span> <span style="color: #a0522d;">::</span> <span style="color: #228b22;">ObjShade</span> <span style="color: #a0522d;">-&gt;</span> <span style="color: #228b22;">String</span>
+<span style="color: #0000ff;">dos2strRow</span>  os <span style="color: #a0522d;">=</span> (<span style="color: #a0522d;">++</span> <span style="color: #8b2252;">"|\n"</span>) <span style="color: #a0522d;">$</span> concat <span style="color: #a0522d;">$</span> map (<span style="color: #8b2252;">'|'</span><span style="color: #228b22;">:</span>) dos
+  <span style="color: #a020f0;">where</span> dos <span style="color: #a0522d;">=</span> map show <span style="color: #a0522d;">$</span> oshd2dos os
+
+<span style="color: #0000ff;">osTab</span> <span style="color: #a0522d;">::</span> [<span style="color: #228b22;">ObjShade</span>] <span style="color: #a0522d;">-&gt;</span> <span style="color: #228b22;">String</span>
+<span style="color: #0000ff;">osTab</span> t <span style="color: #a0522d;">=</span> headLine <span style="color: #a0522d;">++</span> datRows
+  <span style="color: #a020f0;">where</span> datRows <span style="color: #a0522d;">=</span> concat <span style="color: #a0522d;">$</span> map dos2strRow t
+        headLine <span style="color: #a0522d;">=</span> (<span style="color: #8b2252;">"| x1 | x2 | x3 |\n"</span>)
+</pre>
+</div>
+
+<p>
+So now that we have invested all that effort, and it really is very little code, we can run the algorithm with just this:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-haskell"><span style="color: #a020f0;">let</span> emRun <span style="color: #a0522d;">=</span> steps [testDat]
+</pre>
+</div>
+
+<p>
+Note that we now have a promise of an infinite list, but all is well, as long as we don't evaluate it all (which of course I did accidentally. <code>C-c C-c</code> is your friend). I will just take the first ten rows, because I know that this is enough for this example. If we didn't know that, we might have to check the distance between consecutive values to test for when we had an answer, or needed to give up. 
+</p>
+
+<p>
+So, to visualize the whole thing we can just print each line of <code>emRun</code>. This is <code>do</code> notation and puts us in the dreaded <b>IO monad</b>, which of course is the only way we can actually print things. And we get this. Compare it <a href="https://ogbe.net/blog/sloppy_papers.html">to</a>.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-haskell"><span style="color: #a020f0;">do</span> {putStrLn <span style="color: #a0522d;">$</span> osTab <span style="color: #a0522d;">$</span> take 10 emRun}
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-org"><span style="color: #0000ff;">|                 x1 |                 x2 |   x3 |</span>
+<span style="color: #0000ff;">|               31.5 |               31.5 | 37.0 |</span>
+<span style="color: #0000ff;">|  26.47546012269939 |  36.52453987730062 | 37.0 |</span>
+<span style="color: #0000ff;">|  25.29815714525046 |  37.70184285474954 | 37.0 |</span>
+<span style="color: #0000ff;">| 25.058740049929433 | 37.941259950070574 | 37.0 |</span>
+<span style="color: #0000ff;">| 25.011513688391076 |  37.98848631160893 | 37.0 |</span>
+<span style="color: #0000ff;">| 25.002254551869314 | 37.997745448130686 | 37.0 |</span>
+<span style="color: #0000ff;">| 25.000441388358183 |  37.99955861164182 | 37.0 |</span>
+<span style="color: #0000ff;">|  25.00008641016833 | 37.999913589831664 | 37.0 |</span>
+<span style="color: #0000ff;">| 25.000016916307274 |  37.99998308369271 | 37.0 |</span>
+<span style="color: #0000ff;">|  25.00000331165922 | 37.999996688340765 | 37.0 |</span>
+</pre>
+</div>
+
+<p>
+Of course if you haven't looked at the tutorial article or post you won't really know why some of the functions have the form they do. I hope to write my own brief summary of the EM algorithm implemented here as a learning exercise. But don't hold your breath. As to the Haskell code, I recommend all the usual subjects, especially <span class="underline">Learn You A Haskell</span>.
+</p>
+</div>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" name="fn.1" class="footnum" href="#fnr.1">1</a></sup> <p class="footpara">
+As an aside I just wrote a whole research article in org with all the R functions for statistical analysis and figure generation in the org file itself. It was a huge pain, but it is, I think, the right way to do things.
+</p></div>
+
+
+</div>
+</div></div><div class="col-md-3"><nav id="table-of-contents">
+<div id="text-table-of-contents" class="bs-docs-sidebar">
+<ul class="nav">
+<li><a href="#sec-1">1. EM Algorithm and Haskell</a>
+<ul class="nav">
+<li><a href="#sec-1-1">1.1. Orgmode and Haskell</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav>
+</div></div></div>
+<footer id="postamble" class="">
+<div><p class="author">Author: Britt Anderson</p>
+<p class="date">Created: 2016-06-15 Wed 17:30</p>
+</div>
+</footer>
+</body>
+</html>
