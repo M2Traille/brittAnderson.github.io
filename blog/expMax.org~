@@ -1,0 +1,131 @@
+#+Title: Expectation Maximization
+#+Author: Britt Anderson
+* EM Algorithm and Haskell
+Two things on my to-do list have been to spend a little more time with the [[https://en.wikipedia.org/wiki/Expectation%E2%80%93maximization_algorithm][EM algorithm]], and force myself to try and experiment with [[https://www.haskell.org/][Haskell]]. In addition, as if those two goals weren't sufficient, I have been wanting to cement my orgmode and emacs facility with the idea of trying to pile all this together so as to become more fluid at producing [[http://link.springer.com/chapter/10.1007/978-1-4612-2544-7_5][reproducible research]] [fn:rr]. So that explains this blog entry in this format. 
+
+The stimulus for this entry was an [[https://ogbe.net/blog/sloppy_papers.html][excellent post]] by Dennis Ogbe. Much of his post dealt with the excellent point that authors can be sloppy, and this can greatly discourage students, who have, probably correctly, a bias to suspect themselves first when disagreeing with the "book." I recommend reading this post and looking at the [[http://ieeexplore.ieee.org/xpl/login.jsp?tp=&arnumber=543975&url=http%253A%252F%252Fieeexplore.ieee.org%252Fxpls%252Fabs_all.jsp%253Farnumber%253D543975][article]], because the number of typos is truly frightening, and it is even more than Dennis points out. 
+
+But in addition to giving a useful cautionary note Dennis also wrote some Python code to implement the EM algorithm for solving the toy example in the paper. I don't wish to repeat his excellent explanation about the algorithm, but I did think it would be a good exercise to recreate it in Haskell.
+
+Note that by and large this effort is for myself. I am purposely trying to use different aspects of the language that are odd or unfamiliar to me so that I can understand them better, and make better use of them when they would be helpful. For most of what is here these things are definitely likely to be overkill. But we beginners can always use more concrete examples, and I am posting these here in case they might eventually help one or two people. In general, you are probably better just using a pre-writen [[https://hackage.haskell.org/package/statistics][library]].  
+** Orgmode and Haskell
+A nice feature of orgmode is the ability to publish. Which is how this blog is being generated. A second great feature is the ability to embed code into the org file itself. Then the org file becomes not just a record of of the code, but can be the code itself. I found this to work extremely well with R and ESS where there is excellent integration and the idea of an interpreted, iterative session make sense. This is not the case with Haskell. Orgmode uses ghci to interpret the code. This means things like variable declarations need to be preceded with ~let~. This make things look ugly, but worse it means that you cannot just use the source file as a module in the orgfile. Here is how I worked around.
+
+First, I loaded the source file that has the variables and functions I want to use in this post. This initiates a haskell session. I tried to rename the session, but that never seemed to work. Now all our code and functions are in an inferior ghci session somewhere in emacs (should be called \*haskell\* if you want to look for the buffer).
+ #+BEGIN_SRC haskell :results silent
+ :load "/home/britt/haskell/temp/Em/src/Em"
+ #+End_Src
+
+The toy problem features two categories of stimuli: light and dark. There is a meter to detect those, but there are two subclasses of dark objects, square and round, and our meter doesn't distinguish those. I used the data declaration to set up types that we can use to represent these entities. Even though we know that the number of objects, must be a whole number, we are going to need floats for the algorithm so that is the reason for the =Double=. In addition, we create a synonym for our probability distribution which will represent the probability of each of the three underlying entities: dark squares, dark round things, and light things.
+ #+Begin_Src haskell :export code :results none
+ data ObjShape = ObjShape { round :: Double, square ::Double }
+                 deriving (Show,Eq)
+
+ data ObjShade = ObjShade { dark  :: ObjShape, light :: Double}
+                   deriving (Show,Eq)
+
+ type Pdist = (Double,Double,Double)
+ #+END_SRC
+
+
+This shows how we can use our constructors to create values of our types. The test data is the initial guess made for the toy problem. The true value is shown as well.
+ #+BEGIN_SRC haskell :export code :results none
+ trueDat = ObjShade (ObjShape 25.0 38.0) 37.0
+ testDat = ObjShade (ObjShape 31.5 31.5) 37.0
+ #+END_SRC
+
+We can evaluate in orgmode some haskell and print the output as a result. Let's look at one of the values we constructed.
+ #+Begin_src haskell :exports both :results value replace
+ trueDat
+ #+End_src
+
+ #+RESULTS:
+ : ObjShade {dark = ObjShape {round = 25.0, square = 38.0}, light = 37.0}
+
+Though reviewing the EM algorithm is not the goal of this post, things may not make sense without a little bit of context. The logic to the EM approach assumes the existence of hidden variables. If there aren't any, we make some up. We then use our data to compute the likely value for our parameter, here the probability distribution for each object type. Here the distribution is given to us. I wrote it as a [[https://wiki.haskell.org/Anonymous_function][lambda function]] just for practice. I could have said ~ps p = ...~ just as well.
+ #+BEGIN_SRC haskell :export code :results none
+ ps :: Double -> Pdist
+ ps = \p -> (1/4,1/4+p/4,1/2-p/4)
+ #+END_SRC
+
+This is just a convenience function that we will need to count the types of our different objects so we can update our parameter estimate. Again we are using a lamda format to specifiy the function. I am also using functions from the =Control.Applicative= module so that I can apply the two accessor functions we created with our data declaration above. When we use ~dark~ on a value of type ~ObjShade~ we get the dark value. We are going to put that into a list context here (because List is in the Functor type class). This is going to act like a sort of ~map~ where we can apply each of the functions to our ~ObjShape~ value, and then we sum things up. 
+ #+BEGIN_SRC haskell :export code :results none
+ countObjs :: ObjShade -> Double
+ countObjs  = \x -> sum $ [Em.round , square] <*> (pure . dark) x
+ #+END_SRC
+
+For our maximization step we are going to find the probability parameter that maximizes things, which requires taking a derivative - that is why things look a little different. And for the expectation step, we find the expected number of each "thing" given our maximized probability paramter. And then we repeat.
+ #+BEGIN_SRC haskell :export code :results none
+ mstep :: ObjShade -> Pdist
+ mstep  os = ps $ (2.0 * fx - fy) / (fx + fy)
+   where fx = (square . dark) os
+         fy = light os
+
+ estep :: Pdist -> ObjShade -> ObjShade
+ estep pd@(p1,p2,p3) os = ObjShade {dark = newd , light = light os}
+   where
+     nd = countObjs os 
+     news = nd * p2 / (p1 + p2)
+     newr = nd * p1 / (p1 + p2)
+     newd = ObjShape {square = news, Em.round = newr}
+
+ step :: ObjShade -> ObjShade
+ step = \os -> estep (mstep os) os
+
+ steps :: [ObjShade] -> [ObjShade]
+ steps [x] = steps $ x:[step x]
+ steps xs = (init xs) ++ steps [last xs]
+ #+END_SRC
+The ~estep~ and ~mstep~ functions do their thing, and I used the ~where~ statement to hopefully keep things a bit more readable and clean.
+
+The ~step~ function implements one single step, and then the ~steps~ function does this /ad infinitum/. Breaking everything up like this was just a design choice. I purposely made the ~steps~ function infinitely repeating, because I really like the idea of lazy evaluation. I actually think it could be a feature of human cogntion too. It took me an embarrasinly long time to figure out how to write this [[http://learnyouahaskell.com/recursion][recursively]]. 
+
+
+As with most languages that I have used, you often end up writing more to visualize your output than you needed to create the output. But practice makes perfect, so I wrote some functions to parse the data from our ~ObjShade~ values so that we could compare the estimates generated here with those produce in the article and by Dennis. First we get the values for the different things out of the data value so we can use them. Then we map the insertion of the pipe character between the numbers. This lets us do the whole thing in one shot without a loop. The show command is just a way to turn numbers into strings for printing. Lastly, I just prepend a first row with labels. Again we use the applicative technique. We also curry the ~++~ function so that even though we write it first, it is actually sticking a newline at the end. 
+ #+BEGIN_SRC haskell :export code :results none
+ oshd2dos :: ObjShade -> [Double]
+ oshd2dos =  \x -> (m ++ [light]) <*> pure x
+   where m = map (. dark) [Em.round,square]
+        
+ dos2strRow :: ObjShade -> String
+ dos2strRow  os = (++ "|\n") $ concat $ map ('|':) dos
+   where dos = map show $ oshd2dos os
+
+ osTab :: [ObjShade] -> String
+ osTab t = headLine ++ datRows
+   where datRows = concat $ map dos2strRow t
+         headLine = ("| x1 | x2 | x3 |\n")
+ #+END_SRC
+
+ So now that we have invested all that effort, and it really is very little code, we can run the algorithm with just this:
+ #+BEGIN_SRC haskell :exports both :results silent
+ let emRun = steps [testDat]
+ #+END_SRC
+
+Note that we now have a promise of an infinite list, but all is well, as long as we don't evaluate it all (which of course I did accidentally. =C-c C-c= is your friend). I will just take the first ten rows, because I know that this is enough for this example. If we didn't know that, we might have to check the distance between consecutive values to test for when we had an answer, or needed to give up. 
+
+So, to visualize the whole thing we can just print each line of ~emRun~. This is ~do~ notation and puts us in the dreaded *IO monad*, which of course is the only way we can actually print things. And we get this. Compare it [[https://ogbe.net/blog/sloppy_papers.html][to]].
+ #+BEGIN_SRC haskell :exports both :results value org replace
+ do {putStrLn $ osTab $ take 10 emRun}
+ #+END_SRC
+
+ #+RESULTS:
+ #+BEGIN_SRC org
+ |                 x1 |                 x2 |   x3 |
+ |               31.5 |               31.5 | 37.0 |
+ |  26.47546012269939 |  36.52453987730062 | 37.0 |
+ |  25.29815714525046 |  37.70184285474954 | 37.0 |
+ | 25.058740049929433 | 37.941259950070574 | 37.0 |
+ | 25.011513688391076 |  37.98848631160893 | 37.0 |
+ | 25.002254551869314 | 37.997745448130686 | 37.0 |
+ | 25.000441388358183 |  37.99955861164182 | 37.0 |
+ |  25.00008641016833 | 37.999913589831664 | 37.0 |
+ | 25.000016916307274 |  37.99998308369271 | 37.0 |
+ |  25.00000331165922 | 37.999996688340765 | 37.0 |
+ #+END_SRC
+
+Of course if you haven't looked at the tutorial article or post you won't really know why some of the functions have the form they do. I hope to write my own brief summary of the EM algorithm implemented here as a learning exercise. But don't hold your breath. As to the Haskell code, I recommend all the usual subjects, especially _Learn You A Haskell_.
+
+* Footnotes
+
+[fn:rr] As an aside I just wrote a whole research article in org with all the R functions for statistical analysis and figure generation in the org file itself. It was a huge pain, but it is, I think, the right way to do things.

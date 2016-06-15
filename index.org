@@ -9,5 +9,7 @@ A structure preserving map from my mind to yours
   2. What is Risk? What is a Decision?
      #+include: "blog/deciding-what-we-mean-by-deciding.org" :lines "4-5"
      [[file:blog/deciding-what-we-mean-by-deciding.org][read more ...]]
-    
+  3. A Simple EM Demo in Haskell
+     #+include: "blog/expMax.org" :lines "4-5"     
+     [[file:blog/expMax.org][read more ...]]
 * Miscellanies (tbd)
