@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>Making a CV with Orgmode is a Pain</title>
+<!-- 2016-09-07 Wed 15:24 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="Org-mode">
+<meta name="author" content="Britt Anderson">
+
+<link  href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<style type="text/css">
+/* org mode styles on top of twbs */
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    font-size: 18px;
+    margin-bottom: 105px;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 101px;
+    background-color: #f5f5f5;
+}
+
+footer > div {
+    padding: 10px;
+}
+
+footer p {
+    margin: 0 0 5px;
+    text-align: center;
+    font-size: 16px;
+}
+
+#table-of-contents {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+blockquote p {
+    font-size: 18px;
+}
+
+pre {
+    font-size: 16px;
+}
+
+.footpara {
+    display: inline-block;
+}
+
+figcaption {
+  font-size: 16px;
+  color: #666;
+  font-style: italic;
+  padding-bottom: 15px;
+}
+
+/* from twbs docs */
+
+.bs-docs-sidebar.affix {
+    position: static;
+}
+@media (min-width: 768px) {
+    .bs-docs-sidebar {
+        padding-left: 20px;
+    }
+}
+
+/* All levels of nav */
+.bs-docs-sidebar .nav > li > a {
+    display: block;
+    padding: 4px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #999;
+}
+.bs-docs-sidebar .nav > li > a:hover,
+.bs-docs-sidebar .nav > li > a:focus {
+    padding-left: 19px;
+    color: #A1283B;
+    text-decoration: none;
+    background-color: transparent;
+    border-left: 1px solid #A1283B;
+}
+.bs-docs-sidebar .nav > .active > a,
+.bs-docs-sidebar .nav > .active:hover > a,
+.bs-docs-sidebar .nav > .active:focus > a {
+    padding-left: 18px;
+    font-weight: bold;
+    color: #A1283B;
+    background-color: transparent;
+    border-left: 2px solid #A1283B;
+}
+
+/* Nav: second level (shown on .active) */
+.bs-docs-sidebar .nav .nav {
+    display: none; /* Hide by default, but at >768px, show it */
+    padding-bottom: 10px;
+}
+.bs-docs-sidebar .nav .nav > li > a {
+    padding-top: 1px;
+    padding-bottom: 1px;
+    padding-left: 30px;
+    font-size: 12px;
+    font-weight: normal;
+}
+.bs-docs-sidebar .nav .nav > li > a:hover,
+.bs-docs-sidebar .nav .nav > li > a:focus {
+    padding-left: 29px;
+}
+.bs-docs-sidebar .nav .nav > .active > a,
+.bs-docs-sidebar .nav .nav > .active:hover > a,
+.bs-docs-sidebar .nav .nav > .active:focus > a {
+    padding-left: 28px;
+    font-weight: 500;
+}
+
+/* Nav: third level (shown on .active) */
+.bs-docs-sidebar .nav .nav .nav {
+    padding-bottom: 10px;
+}
+.bs-docs-sidebar .nav .nav .nav > li > a {
+    padding-top: 1px;
+    padding-bottom: 1px;
+    padding-left: 40px;
+    font-size: 12px;
+    font-weight: normal;
+}
+.bs-docs-sidebar .nav .nav .nav > li > a:hover,
+.bs-docs-sidebar .nav .nav .nav > li > a:focus {
+    padding-left: 39px;
+}
+.bs-docs-sidebar .nav .nav .nav > .active > a,
+.bs-docs-sidebar .nav .nav .nav > .active:hover > a,
+.bs-docs-sidebar .nav .nav .nav > .active:focus > a {
+    padding-left: 38px;
+    font-weight: 500;
+}
+
+/* Show and affix the side nav when space allows it */
+@media (min-width: 992px) {
+    .bs-docs-sidebar .nav > .active > ul {
+        display: block;
+    }
+    /* Widen the fixed sidebar */
+    .bs-docs-sidebar.affix,
+    .bs-docs-sidebar.affix-bottom {
+        width: 213px;
+    }
+    .bs-docs-sidebar.affix {
+        position: fixed; /* Undo the static from mobile first approach */
+        top: 20px;
+    }
+    .bs-docs-sidebar.affix-bottom {
+        position: absolute; /* Undo the static from mobile first approach */
+    }
+    .bs-docs-sidebar.affix .bs-docs-sidenav,.bs-docs-sidebar.affix-bottom .bs-docs-sidenav {
+        margin-top: 0;
+        margin-bottom: 0
+    }
+}
+@media (min-width: 1200px) {
+    /* Widen the fixed sidebar again */
+    .bs-docs-sidebar.affix-bottom,
+    .bs-docs-sidebar.affix {
+        width: 263px;
+    }
+}
+</style>
+<script type="text/javascript">
+$(function() {
+    'use strict';
+
+    $('.bs-docs-sidebar li').first().addClass('active');
+
+    $(document.body).scrollspy({target: '.bs-docs-sidebar'});
+
+    $('.bs-docs-sidebar').affix();
+});
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href=""> UP </a>
+ |
+ <a accesskey="H" href="/index.html"> HOME </a>
+</div><div id="content" class="container">
+<div class="row"><div class="col-md-9"><h1 class="title">Making a CV with Orgmode is a Pain</h1>
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> CVs are generally painful</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+In most lines of work the standard is the <i>résumé</i>. A short, page or two, summary of professional skills, education, and experience with some contact information. Not so in academia. We have to put everything in, and so it would seem a bit misleading to refer to it by a name that suggests brevity and summary. Though we shield it in latin, we are giving you our <a href="https://en.wikipedia.org/wiki/Curriculum_vitae">life's story</a>. 
+</p>
+</div>
+</div>
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> CVs need to contain citations</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Aye. Here's the rub. There are a lot of very pleasant markup languages that will let you do a great job of taking some basic text and header annotations and turn it in to something pleasing to look at and translatable to multiple file types. Not so when you start adding citations though. Then comes the pain. 
+</p>
+</div>
+</div>
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Because CVs need to be multi-functional</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+The pdf is still the standard format for the CV, but what about websites? People can (and do) download CVs, but it is a bit cumbersome. Someone may find your page and decide that it just isn't worth the hassle, or if they are viewing from their phone, they may not want to pollute their phone with your 20 page document that they can't easily read on the little screen anyway - and burn their data in the process. So you want to have an html format too. But how do you do that?
+</p>
+</div>
+</div>
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> And it isn't only for your CV that you need your citations.</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+You also may want to refer to them in an article you are writing, or it may be that you have a performance appraisal coming up, and like all good organizations they insist on using some corporate or bureaucratic form, probably that has to be saved in a <code>docx</code> format. Now what? Do you have separate files for each of these different venues? Trying to keep them all up to date with each new poster or presentation you give?
+</p>
+</div>
+</div>
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> It can be done with orgmode</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+It is still painful, and it is not simple, but it is doable, and I have not found a better way. Although I concede there are other ways. Currently I am still doing things manually for much of my processing, but it is easier and more maintainable then what I used to do. 
+</p>
+</div>
+</div>
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6"><span class="section-number-2">6</span> First the org file.</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+This is not a tutorial on org. You will have to find that elsewhere. It is an emacs mode, but it is also much more, and it allows you to take notes or write documents which you can then export to a variety of formats. 
+</p>
+</div>
+<div id="outline-container-sec-6-1" class="outline-3">
+<h3 id="sec-6-1"><span class="section-number-3">6.1</span> Use <code>#+Include:</code></h3>
+<div class="outline-text-3" id="text-6-1">
+<p>
+One way to ease maintenance is to re-use one file in multiple locations. Rather than write your CV with everything in place give yourself little .org files that cover your Education or Professional appointments and then include them in the CV. Then you can update one file when you are promoted, and it will propagage whenever you re-export that annual peformance report, CV, or website.
+</p>
+
+<p>
+The language looks something like this:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-text">* Education
+#+Include: ~/vita/inputs/educ.org
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-7" class="outline-2">
+<h2 id="sec-7"><span class="section-number-2">7</span> You need to use LaTeX - Sorry</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+It's a beast, but it is also very, very functional, and affords a great many ways to process a document and, of course, org-mode exports to pdf via LaTeX. If you put all your references in one big <code>.bib</code> file you can then select by type or keyword to create subbibliographies, e.g., to have separate sections for Articles and Chapters, but you can use that same big file when writing articles or sharing a reference data base with a colleague. 
+</p>
+
+<p>
+It seems that the TeX world is moving from bibtex to biblatex. This can be a bit unfortunate since there is much more documentation and on-line examples using the former, but biblatex is more versatile. For example, the following code allows me to suppress the heading and create a sub-bibliography of my articles. 
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-text">\begin{refsection}
+\nocite{*}
+\printbibliography[heading=none,keyword=book]
+\end{refsection}
+</pre>
+</div>
+
+<p>
+Earlier, in my preamble, I defined some LaTeX Attributes
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-text">#+LATEX_HEADER: \usepackage[sorting=ydnt, defernumbers=true,backend=biber]{biblatex}
+#+LATEX_HEADER: \addbibresource{~bib/temp.bib}
+</pre>
+</div>
+
+<p>
+That determine sorting and the backend processor. Make sure that your <code>org-latex-pdf-process</code> agrees with the backend you are using and runs things the requisite number of times to get everything updated. I use this which is set in my init file.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-text">(setq org-latex-pdf-process '("pdflatex -interaction nonstopmode %f" "biber %b" "pdflatex -interaction nonstopmode %f" "pdflatex -interaction nonstopmode --synctex=-1 %f"))
+</pre>
+</div>
+
+<p>
+At this point you simply need to do a <code>C-x C-e l p</code> to get a pdf output. Then, to get the html for your webpage, you will use <code>htlatex</code>. If you are a linux user you either have this (since it is used by ob-latex, part of org-babel) or you can get it. It might have the name tex4ht as the package, but htlatex is useable at the command line. In the process of creating the pdf file you left a .tex file laying around. That is what htlatex will use. You can run this without any css, but you can also create a config file if you like. This one will create frames and change the background color and font.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-text">\Preamble{html,frames,2}
+\Css{body {color : white}}
+\Css{body {background-color: gray}}
+\Css{body {font-family: Sans-serif}}
+\begin{document}
+\EndPreamble
+</pre>
+</div>
+
+<p>
+Then from the command line you do: <code>htlatex filename "mycfg"\</code> Then gather up the html files and put them where you want them.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-8" class="outline-2">
+<h2 id="sec-8"><span class="section-number-2">8</span> Cumbersome, but functional</h2>
+<div class="outline-text-2" id="text-8">
+<p>
+Some of these manual steps should be able to be done in an elisp function if you are so inclined. I don't have the skill to do it easily, and this has already cost me way too much time, but hopefully I will gain it back in the months and years to come. 
+</p>
+</div>
+
+<div id="outline-container-sec-8-1" class="outline-3">
+<h3 id="sec-8-1"><span class="section-number-3">8.1</span> And here is what I got</h3>
+<div class="outline-text-3" id="text-8-1">
+<dl class="org-dl">
+<dt> pdf  </dt><dd><a href="../assets/tmp.pdf">../assets/tmp.pdf</a>
+</dd>
+<dt> html </dt><dd><a href="../assets/cvpages/tmp.html">../assets/cvpages/tmp.html</a>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+</div><div class="col-md-3"><nav id="table-of-contents">
+<div id="text-table-of-contents" class="bs-docs-sidebar">
+<ul class="nav">
+<li><a href="#sec-1">1. CVs are generally painful</a></li>
+<li><a href="#sec-2">2. CVs need to contain citations</a></li>
+<li><a href="#sec-3">3. Because CVs need to be multi-functional</a></li>
+<li><a href="#sec-4">4. And it isn't only for your CV that you need your citations.</a></li>
+<li><a href="#sec-5">5. It can be done with orgmode</a></li>
+<li><a href="#sec-6">6. First the org file.</a>
+<ul class="nav">
+<li><a href="#sec-6-1">6.1. Use <code>#+Include:</code></a></li>
+</ul>
+</li>
+<li><a href="#sec-7">7. You need to use LaTeX - Sorry</a></li>
+<li><a href="#sec-8">8. Cumbersome, but functional</a>
+<ul class="nav">
+<li><a href="#sec-8-1">8.1. And here is what I got</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav>
+</div></div></div>
+<footer id="postamble" class="">
+<div><p class="author">Author: Britt Anderson</p>
+<p class="date">Created: 2016-09-07 Wed 15:24</p>
+</div>
+</footer>
+</body>
+</html>
