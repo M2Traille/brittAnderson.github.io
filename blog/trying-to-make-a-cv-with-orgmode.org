@@ -1,0 +1,67 @@
+#+Title: Making a CV with Orgmode is a Pain
+#+Author: Britt Anderson
+* CVs are generally painful
+In most lines of work the standard is the /résumé/. A short, page or two, summary of professional skills, education, and experience with some contact information. Not so in academia. We have to put everything in, and so it would seem a bit misleading to refer to it by a name that suggests brevity and summary. Though we shield it in latin, we are giving you our [[https://en.wikipedia.org/wiki/Curriculum_vitae][life's story]]. 
+* CVs need to contain citations
+Aye. Here's the rub. There are a lot of very pleasant markup languages that will let you do a great job of taking some basic text and header annotations and turn it in to something pleasing to look at and translatable to multiple file types. Not so when you start adding citations though. Then comes the pain. 
+* Because CVs need to be multi-functional
+The pdf is still the standard format for the CV, but what about websites? People can (and do) download CVs, but it is a bit cumbersome. Someone may find your page and decide that it just isn't worth the hassle, or if they are viewing from their phone, they may not want to pollute their phone with your 20 page document that they can't easily read on the little screen anyway - and burn their data in the process. So you want to have an html format too. But how do you do that?
+* And it isn't only for your CV that you need your citations.
+You also may want to refer to them in an article you are writing, or it may be that you have a performance appraisal coming up, and like all good organizations they insist on using some corporate or bureaucratic form, probably that has to be saved in a =docx= format. Now what? Do you have separate files for each of these different venues? Trying to keep them all up to date with each new poster or presentation you give?
+* It can be done with orgmode
+It is still painful, and it is not simple, but it is doable, and I have not found a better way. Although I concede there are other ways. Currently I am still doing things manually for much of my processing, but it is easier and more maintainable then what I used to do. 
+* First the org file.
+This is not a tutorial on org. You will have to find that elsewhere. It is an emacs mode, but it is also much more, and it allows you to take notes or write documents which you can then export to a variety of formats. 
+** Use =#+Include:=
+One way to ease maintenance is to re-use one file in multiple locations. Rather than write your CV with everything in place give yourself little .org files that cover your Education or Professional appointments and then include them in the CV. Then you can update one file when you are promoted, and it will propagage whenever you re-export that annual peformance report, CV, or website.
+
+The language looks something like this:
+
+#+BEGIN_src text
+  * Education
+  #+Include: ~/vita/inputs/educ.org
+#+END_src
+* You need to use LaTeX - Sorry
+It's a beast, but it is also very, very functional, and affords a great many ways to process a document and, of course, org-mode exports to pdf via LaTeX. If you put all your references in one big ~.bib~ file you can then select by type or keyword to create subbibliographies, e.g., to have separate sections for Articles and Chapters, but you can use that same big file when writing articles or sharing a reference data base with a colleague. 
+
+It seems that the TeX world is moving from bibtex to biblatex. This can be a bit unfortunate since there is much more documentation and on-line examples using the former, but biblatex is more versatile. For example, the following code allows me to suppress the heading and create a sub-bibliography of my articles. 
+
+#+BEGIN_SRC text
+\begin{refsection}
+\nocite{*}
+\printbibliography[heading=none,keyword=book]
+\end{refsection}
+#+END_SRC
+
+Earlier, in my preamble, I defined some LaTeX Attributes
+
+#+BEGIN_SRC text
+#+LATEX_HEADER: \usepackage[sorting=ydnt, defernumbers=true,backend=biber]{biblatex}
+#+LATEX_HEADER: \addbibresource{~bib/temp.bib}
+#+END_SRC
+
+That determine sorting and the backend processor. Make sure that your =org-latex-pdf-process= agrees with the backend you are using and runs things the requisite number of times to get everything updated. I use this which is set in my init file.
+
+#+BEGIN_SRC text
+(setq org-latex-pdf-process '("pdflatex -interaction nonstopmode %f" "biber %b" "pdflatex -interaction nonstopmode %f" "pdflatex -interaction nonstopmode --synctex=-1 %f"))
+#+END_SRC
+
+At this point you simply need to do a =C-x C-e l p= to get a pdf output. Then, to get the html for your webpage, you will use =htlatex=. If you are a linux user you either have this (since it is used by ob-latex, part of org-babel) or you can get it. It might have the name tex4ht as the package, but htlatex is useable at the command line. In the process of creating the pdf file you left a .tex file laying around. That is what htlatex will use. You can run this without any css, but you can also create a config file if you like. This one will create frames and change the background color and font.
+
+#+BEGIN_SRC text
+\Preamble{html,frames,2}
+\Css{body {color : white}}
+\Css{body {background-color: gray}}
+\Css{body {font-family: Sans-serif}}
+\begin{document}
+\EndPreamble
+#+END_SRC
+
+Then from the command line you do: ~htlatex filename "mycfg"\~ Then gather up the html files and put them where you want them.
+
+* Cumbersome, but functional
+Some of these manual steps should be able to be done in an elisp function if you are so inclined. I don't have the skill to do it easily, and this has already cost me way too much time, but hopefully I will gain it back in the months and years to come. 
+
+** And here is what I got
+   - pdf  :: [[file:../assets/tmp.pdf]]
+   - html :: [[file:../assets/cvpages/tmp.html]]

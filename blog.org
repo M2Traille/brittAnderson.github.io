@@ -2,4 +2,6 @@
 * 2016
   1. [[file:blog/orgpage-orgpublish.org][Org-page or Org-publish?]]
   2. [[file:blog/deciding-what-we-mean-by-deciding.org][What is Risk? What is a Decision?]]
+  3. [[file:blog/expMax.org][Expectation Maximization - A simple Haskell example]]
+  4. [[file:blog/trying-to-make-a-cv-with-orgmode.org][Using Orgmode to make a CV and Webpage]]
 

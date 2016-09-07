@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
 <title>Cognitive Functor</title>
-<!-- 2016-06-15 Wed 17:29 -->
+<!-- 2016-09-07 Wed 15:24 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="Org-mode">
+<meta name="author" content="Britt Anderson">
 
 <link  href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -204,6 +205,10 @@ $(function() {
 </li>
 <li><a href="blog/deciding-what-we-mean-by-deciding.html">What is Risk? What is a Decision?</a>
 </li>
+<li><a href="blog/expMax.html">Expectation Maximization - A simple Haskell example</a>
+</li>
+<li><a href="blog/trying-to-make-a-cv-with-orgmode.html">Using Orgmode to make a CV and Webpage</a>
+</li>
 </ol>
 </div>
 </div>
@@ -216,7 +221,8 @@ $(function() {
 </nav>
 </div></div></div>
 <footer id="postamble" class="">
-<div><p class="date">Created: 2016-06-15 Wed 17:29</p>
+<div><p class="author">Author: Britt Anderson</p>
+<p class="date">Created: 2016-09-07 Wed 15:24</p>
 </div>
 </footer>
 </body>

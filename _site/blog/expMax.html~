@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <title>Expectation Maximization</title>
-<!-- 2016-06-15 Wed 17:29 -->
+<!-- 2016-09-07 Wed 15:24 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="Org-mode">
@@ -201,7 +201,8 @@ $(function() {
 <h2 id="sec-1"><span class="section-number-2">1</span> EM Algorithm and Haskell</h2>
 <div class="outline-text-2" id="text-1">
 <p>
-Two things on my to-do list have been to spend a little more time with the <a href="https://en.wikipedia.org/wiki/Expectation%E2%80%93maximization_algorithm">EM algorithm</a>, and force myself to try and experiment with <a href="https://www.haskell.org/">Haskell</a>. In addition, as if those two goals weren't sufficient, I have been wanting to cement my orgmode and emacs facility with the idea of trying to pile all this together so as to become more fluid at producing <a href="http://link.springer.com/chapter/10.1007/978-1-4612-2544-7_5">reproducible research</a> <sup><a id="fnr.1" name="fnr.1" class="footref" href="#fn.1">1</a></sup>. So that explains this blog entry in this format. 
+Two things on my to-do list have been to spend a little more time with the <a href="https://en.wikipedia.org/wiki/Expectation%E2%80%93maximization_algorithm">EM algorithm</a>, and force myself to try and experiment with <a href="https://www.haskell.org/">Haskell</a>. 
+In addition, as if those two goals weren't sufficient, I have been wanting to cement my orgmode and emacs facility with the idea of trying to pile all this together so as to become more fluid at producing <a href="http://link.springer.com/chapter/10.1007/978-1-4612-2544-7_5">reproducible research</a> <sup><a id="fnr.1" name="fnr.1" class="footref" href="#fn.1">1</a></sup>. So that explains this blog entry in this format. 
 </p>
 
 <p>
@@ -268,7 +269,7 @@ We can evaluate in orgmode some haskell and print the output as a result. Let's 
 </div>
 
 <pre class="example">
-ObjShade {dark = ObjShape {round = 25.0, square = 38.0}, light = 37.0}
+&lt;interactive&gt;:7:1: error: Variable not in scope: trueDat
 </pre>
 
 <p>
@@ -370,17 +371,10 @@ So, to visualize the whole thing we can just print each line of <code>emRun</cod
 
 <div class="org-src-container">
 
-<pre class="src src-org"><span style="color: #0000ff;">|                 x1 |                 x2 |   x3 |</span>
-<span style="color: #0000ff;">|               31.5 |               31.5 | 37.0 |</span>
-<span style="color: #0000ff;">|  26.47546012269939 |  36.52453987730062 | 37.0 |</span>
-<span style="color: #0000ff;">|  25.29815714525046 |  37.70184285474954 | 37.0 |</span>
-<span style="color: #0000ff;">| 25.058740049929433 | 37.941259950070574 | 37.0 |</span>
-<span style="color: #0000ff;">| 25.011513688391076 |  37.98848631160893 | 37.0 |</span>
-<span style="color: #0000ff;">| 25.002254551869314 | 37.997745448130686 | 37.0 |</span>
-<span style="color: #0000ff;">| 25.000441388358183 |  37.99955861164182 | 37.0 |</span>
-<span style="color: #0000ff;">|  25.00008641016833 | 37.999913589831664 | 37.0 |</span>
-<span style="color: #0000ff;">| 25.000016916307274 |  37.99998308369271 | 37.0 |</span>
-<span style="color: #0000ff;">|  25.00000331165922 | 37.999996688340765 | 37.0 |</span>
+<pre class="src src-org">&lt;interactive&gt;:11:16: error:
+    Variable not in scope: osTab :: [a0] -&gt; String
+
+&lt;interactive&gt;:11:32: error: Variable not in scope: emRun :: [a0]
 </pre>
 </div>
 
@@ -414,7 +408,7 @@ As an aside I just wrote a whole research article in org with all the R function
 </div></div></div>
 <footer id="postamble" class="">
 <div><p class="author">Author: Britt Anderson</p>
-<p class="date">Created: 2016-06-15 Wed 17:29</p>
+<p class="date">Created: 2016-09-07 Wed 15:24</p>
 </div>
 </footer>
 </body>

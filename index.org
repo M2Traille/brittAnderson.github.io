@@ -12,4 +12,7 @@ A structure preserving map from my mind to yours
   3. A Simple EM Demo in Haskell
      #+include: "blog/expMax.org" :lines "4-5"     
      [[file:blog/expMax.org][read more ...]]
+  4. Making a CV (and Webpage) with Orgmode and Htlatex
+     #+include: "blog/trying-to-make-a-cv-with-orgmode.org" :lines "4-5"
+     [[file:blog/trying-to-make-a-cv-with-orgmode.org][read more...]]
 * Miscellanies (tbd)
