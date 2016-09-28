@@ -269,7 +269,7 @@ We can evaluate in orgmode some haskell and print the output as a result. Let's 
 </div>
 
 <pre class="example">
-&lt;interactive&gt;:7:1: error: Variable not in scope: trueDat
+&lt;interactive&gt;:13:1: error: Variable not in scope: trueDat
 </pre>
 
 <p>
@@ -371,10 +371,10 @@ So, to visualize the whole thing we can just print each line of <code>emRun</cod
 
 <div class="org-src-container">
 
-<pre class="src src-org">&lt;interactive&gt;:11:16: error:
+<pre class="src src-org">&lt;interactive&gt;:17:16: error:
     Variable not in scope: osTab :: [a0] -&gt; String
 
-&lt;interactive&gt;:11:32: error: Variable not in scope: emRun :: [a0]
+&lt;interactive&gt;:17:32: error: Variable not in scope: emRun :: [a0]
 </pre>
 </div>
 

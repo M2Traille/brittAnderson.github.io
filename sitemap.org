@@ -4,7 +4,7 @@
    + [[file:index.org][Cognitive Functor (2016-09-07)]]
    + [[file:theindex.org][Index (2016-06-15)]]
    + [[file:aboutme.org][About (2016-06-15)]]
-   + [[file:blog/trying-to-make-a-cv-with-orgmode.org][Making a CV with Orgmode is a Pain (2016-09-07)]]
+   + [[file:blog/trying-to-make-a-cv-with-orgmode.org][Making a CV with Orgmode is a Pain (2016-09-28)]]
    + [[file:blog/orgpage-orgpublish.org][Org Page or Org Publish? (2016-06-15)]]
    + [[file:blog/expMax.org][Expectation Maximization (2016-06-15)]]
    + [[file:blog/deciding-what-we-mean-by-deciding.org][What is risk? Which decisions are the important ones? (2016-06-15)]]

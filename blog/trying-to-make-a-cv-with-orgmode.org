@@ -29,7 +29,7 @@ It seems that the TeX world is moving from bibtex to biblatex. This can be a bit
 #+BEGIN_SRC text
 \begin{refsection}
 \nocite{*}
-\printbibliography[heading=none,keyword=book]
+\printbibliography[heading=none,keyword=article]
 \end{refsection}
 #+END_SRC
 
@@ -63,5 +63,5 @@ Then from the command line you do: ~htlatex filename "mycfg"\~ Then gather up th
 Some of these manual steps should be able to be done in an elisp function if you are so inclined. I don't have the skill to do it easily, and this has already cost me way too much time, but hopefully I will gain it back in the months and years to come. 
 
 ** And here is what I got
-   - pdf  :: [[file:../assets/tmp.pdf]]
-   - html :: [[file:../assets/cvpages/tmp.html]]
+   - pdf  :: [[file:../assets/brittCV.pdf]]
+   - html :: [[file:../assets/cvpages/brittCV.html]]

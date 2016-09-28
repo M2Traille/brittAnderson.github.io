@@ -338,9 +338,9 @@ Some of these manual steps should be able to be done in an elisp function if you
 <h3 id="sec-8-1"><span class="section-number-3">8.1</span> And here is what I got</h3>
 <div class="outline-text-3" id="text-8-1">
 <dl class="org-dl">
-<dt> pdf  </dt><dd><a href="assets/tmp.pdf">assets/tmp.pdf</a>
+<dt> pdf  </dt><dd><a href="../assets/tmp.pdf">../assets/tmp.pdf</a>
 </dd>
-<dt> html </dt><dd><a href="assets/cvpages/tmp.html">assets/cvpages/tmp.html</a>
+<dt> html </dt><dd><a href="../assets/cvpages/tmp.html">../assets/cvpages/tmp.html</a>
 </dd>
 </dl>
 </div>
